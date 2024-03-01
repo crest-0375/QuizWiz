@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">QuizWiz</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or">OR</string>
+    <string name="don_t_you_have_an_account">Don\'t you have an account? <font color="#3949AB"><b>Sign Up</b></font></string>
+    <string name="forgot_password">I forgot my password</string>
+    <string name="already_have_acc">Already have an account? <font color="#3949AB"><b>Sign In</b></font></string>
+</resources>

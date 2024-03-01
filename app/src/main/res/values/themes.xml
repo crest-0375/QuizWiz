@@ -1,0 +1,9 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.QuizWiz" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/light_brown</item>
+        <item name="colorPrimaryDark">@color/dark_brown</item>
+    </style>
+
+    <style name="Theme.QuizWiz" parent="Base.Theme.QuizWiz" />
+</resources>

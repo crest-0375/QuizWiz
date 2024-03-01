@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "241999460124",
+    "project_id": "quizwiz-by-jemish",
+    "storage_bucket": "quizwiz-by-jemish.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241999460124:android:342ca56c775f438507ecd9",
+        "android_client_info": {
+          "package_name": "com.practice.quizwiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADnzPcGs2p2lw0x5Qs9__UUkP393wz2Hc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
