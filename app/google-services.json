@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "241999460124",
+    "firebase_url": "https://quizwiz-by-jemish-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "quizwiz-by-jemish",
     "storage_bucket": "quizwiz-by-jemish.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.practice.quizwiz"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "241999460124-cmroocrg7ubklqk2jmoon2pev4s85m77.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.practice.quizwiz",
+            "certificate_hash": "ad250d39cd4a612e3c20ff3221e6a7343e252ba1"
+          }
+        },
+        {
+          "client_id": "241999460124-qcf72rheoc14qo39ng500svartt1v2hj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyADnzPcGs2p2lw0x5Qs9__UUkP393wz2Hc"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241999460124-qcf72rheoc14qo39ng500svartt1v2hj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
