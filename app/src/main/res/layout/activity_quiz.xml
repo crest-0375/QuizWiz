@@ -21,9 +21,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/nunito_sans_semi_bold"
+            android:text="@string/time"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="@string/time" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/time"
@@ -31,18 +31,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/nunito_sans_semi_bold"
+            android:text="@string/_60"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="@string/_60" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/nunito_sans_semi_bold"
+            android:text="@string/correct_answer"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="@string/correct_answer" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/correct_ans"
@@ -50,18 +50,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/nunito_sans_semi_bold"
+            android:text="@string/_0"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="@string/_0" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/nunito_sans_semi_bold"
+            android:text="@string/wrong_answer"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="@string/wrong_answer" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/wrong_ans"
@@ -69,9 +69,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/nunito_sans_semi_bold"
+            android:text="@string/_0"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="@string/_0" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -93,9 +93,9 @@
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/nunito_sans_bold"
             android:gravity="center"
-            tools:text="@string/question"
             android:textColor="@color/dark_brown"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            tools:text="@string/question" />
 
         <TextView
             android:id="@+id/option1"
@@ -106,9 +106,9 @@
             android:fontFamily="@font/nunito_sans_semi_bold"
             android:gravity="center"
             android:padding="16dp"
-            tools:text="@string/textview"
             android:textColor="@color/dark_brown"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="@string/textview" />
 
         <TextView
             android:id="@+id/option2"
@@ -119,9 +119,9 @@
             android:fontFamily="@font/nunito_sans_semi_bold"
             android:gravity="center"
             android:padding="16dp"
-            tools:text="@string/textview"
             android:textColor="@color/dark_brown"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="@string/textview" />
 
         <TextView
             android:id="@+id/option3"
@@ -132,9 +132,9 @@
             android:fontFamily="@font/nunito_sans_semi_bold"
             android:gravity="center"
             android:padding="16dp"
-            tools:text="@string/textview"
             android:textColor="@color/dark_brown"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="@string/textview" />
 
         <TextView
             android:id="@+id/option4"
@@ -145,9 +145,35 @@
             android:fontFamily="@font/nunito_sans_semi_bold"
             android:gravity="center"
             android:padding="16dp"
-            tools:text="@string/textview"
             android:textColor="@color/dark_brown"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="@string/textview" />
+
+        <ImageButton
+            android:id="@+id/plus_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/baseline_add_24" />
+
+        <ImageButton
+            android:id="@+id/remove_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/baseline_remove_24" />
+        <ImageButton
+            android:id="@+id/share_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/baseline_share_24" />
     </LinearLayout>
 
     <LinearLayout
@@ -188,6 +214,7 @@
             app:backgroundTint="@null" />
 
     </LinearLayout>
+
 
     <ProgressBar
         android:id="@+id/progressBar"

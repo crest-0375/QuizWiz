@@ -1,12 +1,23 @@
 package com.practice.quizwiz.home
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.res.Configuration
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -16,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.practice.quizwiz.R
 import com.practice.quizwiz.databinding.ActivityQuizBinding
+import java.io.ByteArrayOutputStream
+
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQuizBinding
@@ -32,6 +45,8 @@ class QuizActivity : AppCompatActivity() {
     private var userAnswer = ""
     private var userCorrect = 0
     private var userWrong = 0
+    private lateinit var sharedPreferences: SharedPreferences
+    private var defaultScale = 1f
 
     private lateinit var timer: CountDownTimer
     private val totalTime = 25000L
@@ -48,10 +63,41 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sharedPreferences = this.getSharedPreferences("scale", Context.MODE_PRIVATE)
+//        adjustFontScale(resources.configuration)
         questionsSet.addAll(1..5)
         questionsSet.shuffle()
-        Log.d("TAG", questionsSet.toString())
         gameLogic()
+        defaultScale = sharedPreferences.getFloat("textsize", 1f)
+        binding.plusBtn.setOnClickListener {
+            defaultScale += 0.1f
+            sharedPreferences.edit().putFloat("textsize", defaultScale).apply()
+            adjustFontScale(resources.configuration)
+            Log.d("TAG", defaultScale.toString())
+        }
+        binding.removeBtn.setOnClickListener {
+            defaultScale -= 0.1f
+            sharedPreferences.edit().putFloat("textsize", defaultScale).apply()
+            adjustFontScale(resources.configuration)
+            Log.d("TAG", defaultScale.toString())
+        }
+        binding.shareBtn.setOnClickListener {
+            val image = textAsBitmap(binding.question.text.toString(), 1f, Color.WHITE)
+            val bytes = ByteArrayOutputStream()
+            image.compress(Bitmap.CompressFormat.PNG, 100, bytes)
+            val bitmapPath: String = MediaStore.Images.Media.insertImage(
+                contentResolver,
+                image,
+                "palette",
+                "share palette"
+            )
+            val bitmapUri = Uri.parse(bitmapPath)
+
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.setType("image/png")
+            intent.putExtra(Intent.EXTRA_STREAM, bitmapUri)
+            startActivity(Intent.createChooser(intent, "Share Image"))
+        }
         binding.finish.setOnClickListener { sendScore() }
         binding.next.setOnClickListener {
             resetTimer()
@@ -136,8 +182,8 @@ class QuizActivity : AppCompatActivity() {
                     option4 = snapshot.child(questionsSet.elementAt(questionNumber - 1).toString())
                         .child("4").value.toString()
                     correctAns =
-                        snapshot.child(questionsSet.elementAt(questionNumber - 1).toString()).child("ans").value.toString()
-                    Log.d("TAG", correctAns)
+                        snapshot.child(questionsSet.elementAt(questionNumber - 1).toString())
+                            .child("ans").value.toString()
 
                     binding.question.text = question
                     binding.option1.text = option1
@@ -249,5 +295,41 @@ class QuizActivity : AppCompatActivity() {
                     finish()
                 }
         }
+    }
+
+    private fun adjustFontScale(configuration: Configuration) {
+        val scale = sharedPreferences.getFloat("textsize", 1f)
+        configuration.fontScale = scale
+        val metrics = resources.displayMetrics
+        val wm = getSystemService(WINDOW_SERVICE) as WindowManager
+        wm.defaultDisplay.getMetrics(metrics)
+        metrics.scaledDensity = configuration.fontScale * metrics.density
+        baseContext.resources.updateConfiguration(configuration, metrics)
+        recreate()
+    }
+
+    private fun textAsBitmap(text: String, textSize: Float, textColor: Int): Bitmap {
+        val resources = this.resources
+        val scale = resources.displayMetrics.density
+        var bitmap = BitmapFactory.decodeResource(resources, R.drawable.app_icon)
+        var bitmapConfig = bitmap.getConfig()
+        if (bitmapConfig == null) {
+            bitmapConfig = Bitmap.Config.ARGB_8888
+        }
+        bitmap = bitmap.copy(bitmapConfig, true)
+
+        val canvas = Canvas(bitmap)
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        paint.setColor(Color.BLACK)
+        paint.textSize = (50 * scale).toInt().toFloat()
+        paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
+        val bounds = Rect()
+        paint.getTextBounds(text, 0, text.length, bounds)
+        val x = (bitmap.getWidth() - bounds.width()) / 6
+        val y = (bitmap.getHeight() + bounds.height()) / 5
+        canvas.drawColor(Color.WHITE)
+        canvas.drawText(text, x * scale, y * scale, paint)
+
+        return bitmap
     }
 }
