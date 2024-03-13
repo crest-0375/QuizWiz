@@ -11,6 +11,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -82,7 +83,8 @@ class QuizActivity : AppCompatActivity() {
             Log.d("TAG", defaultScale.toString())
         }
         binding.shareBtn.setOnClickListener {
-            val image = textAsBitmap(binding.question.text.toString(), 1f, Color.WHITE)
+//            val image = textAsBitmap(binding.question.text.toString(), 1f, Color.WHITE)
+            val image = getLLImage(binding.linearLayout4)
             val bytes = ByteArrayOutputStream()
             image.compress(Bitmap.CompressFormat.PNG, 100, bytes)
             val bitmapPath: String = MediaStore.Images.Media.insertImage(
@@ -331,5 +333,21 @@ class QuizActivity : AppCompatActivity() {
         canvas.drawText(text, x * scale, y * scale, paint)
 
         return bitmap
+    }
+
+    private fun getLLImage(view: View): Bitmap {
+        val returnedBitmap =
+            Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+
+        val canvas = Canvas(returnedBitmap)
+
+        val bgDrawable: Drawable? = view.background
+        if (bgDrawable != null) {
+            bgDrawable.draw(canvas)
+        } else {
+            canvas.drawColor(Color.WHITE)
+        }
+        view.draw(canvas)
+        return returnedBitmap
     }
 }
